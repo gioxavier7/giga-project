@@ -34,6 +34,12 @@ senhaInput.id = 'senha';
 senhaInput.placeholder = 'Senha';
 form.appendChild(senhaInput);
 
+const senhaRecuperacaoInput = document.createElement('input');
+senhaRecuperacaoInput.type = 'password';
+senhaRecuperacaoInput.id = 'senhaRecuperacao';
+senhaRecuperacaoInput.placeholder = 'Senha de Recuperação';
+form.appendChild(senhaRecuperacaoInput);
+
 // Cria botão de submit
 const submitButton = document.createElement('button');
 submitButton.type = 'submit';
@@ -56,23 +62,24 @@ form.addEventListener('submit', async (event) => {
     const email = emailInput.value.trim();
     const senha = senhaInput.value.trim();
     const nome = nomeInput.value.trim();
+    const premium = "0"
+    const imagemPerfil = "https://static.vecteezy.com/ti/vetor-gratis/p1/26434417-padrao-avatar-perfil-icone-do-social-meios-de-comunicacao-do-utilizador-foto-vetor.jpg"
+    const senhaRecuperacao = "Gato12"
+    
 
-    if (!email || !senha || !nome) {
+    if (!email || !senha || !nome || !senhaRecuperacao) {
         errorMessage.textContent = 'Preencha todos os campos!';
         errorMessage.style.display = 'block';
         return;
     }
 
     try {
-        // Exibe os dados no console para verificar se estão corretos antes da requisição
-        console.log("Enviando dados:", { email, senha, nome });
-
         const response = await fetch('https://back-spider.vercel.app/user/cadastrarUser', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, senha, nome })
+            body: JSON.stringify({ email, senha, nome, premium, imagemPerfil, senhaRecuperacao })
         });
 
         const data = await response.json();
@@ -86,7 +93,7 @@ form.addEventListener('submit', async (event) => {
         localStorage.setItem('user', JSON.stringify(data.user));
 
         // Redireciona para a tela de login
-        window.location.href = './index.html';
+        window.location.href = '../../index.html';
     } catch (error) {
         errorMessage.textContent = error.message;
         errorMessage.style.display = 'block';
