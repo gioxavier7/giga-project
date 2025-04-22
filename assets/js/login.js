@@ -26,7 +26,7 @@ form.appendChild(emailInput)
 
 // Cria o campo de senha
 const passwordInput = document.createElement('input')
-passwordInput.type = 'password'
+passwordInput.type = 'password';
 passwordInput.id = 'password';
 passwordInput.placeholder = 'Password';
 passwordInput.required = true;
@@ -70,7 +70,6 @@ form.addEventListener('submit', async (event) => {
     const email = emailInput.value.trim()
     const senha = passwordInput.value.trim()
 
-
     if (!email || !senha) {
         errorMessage.textContent = 'Preencha todos os campos!'
         errorMessage.style.display = 'block'
@@ -88,14 +87,22 @@ form.addEventListener('submit', async (event) => {
 
         if (!response.ok) {
             throw new Error(data.message || 'Erro ao fazer login')
-        }
+        }       
 
         // Armazena o token e os dados do usuário no localStorage
         localStorage.setItem('token', data.token)
         localStorage.setItem('user', JSON.stringify(data.user))
 
+        // Armazena o userId no localStorage
+        localStorage.setItem('userId', data.user.id)  // Aqui você armazena o userId
+
+        // Adiciona o console log para verificar o valor do userId
+        // const test = localStorage.getItem('userId')
+        // console.log('User ID:', test);  // Verifica se o userId foi armazenado corretamente
+
         // Redireciona para a página principal após o login
-        window.location.href = './pages/home.html'
+       window.location.href = './pages/home.html'
+
 
     } catch (error) {
         errorMessage.textContent = error.message

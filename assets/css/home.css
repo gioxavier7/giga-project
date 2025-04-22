@@ -298,3 +298,15 @@ body {
     font-size: 24px;
     cursor: pointer;
 }
+
+/* Estilo do botão de curtir */
+.like-btn {
+    color: black; /* Cor padrão */
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+/* Estilo quando o ícone de curtir é clicado */
+.like-btn.liked {
+    color: #e74c3c;     
+}

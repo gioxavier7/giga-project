@@ -90,7 +90,8 @@ form.addEventListener('submit', async (event) => {
 
         // Armazena o token e os dados do usuário no localStorage
         localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.setItem('user', JSON.stringify(data.user)); // Aqui você salva os dados do usuário
+
 
         // Redireciona para a tela de login
         window.location.href = '../../index.html';
